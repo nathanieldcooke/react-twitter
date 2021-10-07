@@ -25,7 +25,14 @@ const getUserToken = (user) => {
 const restoreUser = (req, res, next) => {
   // token being parsed from request's cookies by the cookie-parser middleware
   // function in app.js:
-  const { token } = req.cookies;
+
+  // const { token } = req.cookies; // this is not working
+  const token = req.headers.authorization.split(' ')[1];
+  // console.log('token', req.headers.authorization.split(' ')[1])
+
+
+
+  // console.log("BACK AUTH: ", req.cookies, req.headers)
 
   if (!token) {
     // Send a "401 Unauthorized" response status code
