@@ -18,6 +18,7 @@ function App(props) {
         <NavLink to='/'>Home</NavLink>
         <NavLink to='register'>Register</NavLink>
         <NavLink to='/login'>Login</NavLink>
+        {props.currentUserId ? <NavLink to={`/users/${props.currentUserId}`}>Profile</NavLink> : null}
       </nav>
       <Switch>
         {/* <Route exact path='/'> */}
@@ -33,7 +34,7 @@ function App(props) {
           {/* <LoginForm/> */}
         {/* </Route> */}
         <Route path='/users/:userId'>
-          <Profile />
+          <Profile props />
         </Route>
       </Switch>
     </div>
