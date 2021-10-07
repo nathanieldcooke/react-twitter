@@ -63,7 +63,7 @@ class RegistrationForm extends React.Component {
 
             const {token, user: {id}} = await response.json()
             console.log("resData: ", token, id);
-            this.props.value.updateContext(token, id)
+            this.props.value.login(token, id)
         } catch (e) {
             console.error(e)
         }

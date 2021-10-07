@@ -8,15 +8,24 @@ class AppWithContext extends React.Component {
         this.state = {
             authToken: localStorage.getItem('authToken') || null,
             currentUserId: localStorage.getItem('currentUserId') || null,
-            updateContext: this.updateContext
+            login: this.login,
+            logout: this.logout
         }
     }
 
-    updateContext = (authToken, currentUserId) => {
+    login = (authToken, currentUserId) => {
         this.setState({ authToken, currentUserId }, () => {
             console.log('log', this.state);
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('currentUserId', currentUserId);
+        });
+    }
+
+    logout = () => {
+        this.setState({ authToken: null, currentUserId: null }, () => {
+            console.log('logout', this.state);
+            localStorage.setItem('authToken', null);
+            localStorage.setItem('currentUserId', null);
         });
     }
 
