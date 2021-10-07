@@ -1,11 +1,28 @@
 import React from 'react';
 import {apiBaseUrl} from '../../config.js'
+import UserContext from '../../contexts/UserContext'
 
+// class RegistrationFormWithContext extends React.Component {
+
+// }
+
+const RegistrationFormWithContext = (props) => {
+    
+
+    
+    return (
+        <UserContext.Consumer>
+            {value => <RegistrationForm value={value} {...props} />}
+        </UserContext.Consumer>
+    )
+}
 
 class RegistrationForm extends React.Component {
     constructor(props) {
         super(props);
         // TODO: Set up default state
+
+        console.log("Deez the PROPS: ", props)
         this.state = {
             username: '',
             email: '',
@@ -44,9 +61,9 @@ class RegistrationForm extends React.Component {
                 throw response
             }
 
-            const resData = await response.json()
-            console.log("resData: ",resData);
-
+            const {token, user: {id}} = await response.json()
+            console.log("resData: ", token, id);
+            this.props.value.updateContext(token, id)
         } catch (e) {
             console.error(e)
         }
@@ -90,4 +107,4 @@ class RegistrationForm extends React.Component {
     }
 }
 
-export default RegistrationForm;
+export default RegistrationFormWithContext;

@@ -7,7 +7,10 @@ import LoginForm from './components/session/LoginForm';
 import RegistrationForm from './components/session/RegistrationForm';
 import { AuthRoute, ProtectedRoute } from './Routes'
 
-function App() {
+function App(props) {
+
+  console.log("Props APP: ", props)
+
   return (
     <div>'
       <h1>Twitter Lite</h1>
@@ -18,15 +21,15 @@ function App() {
       </nav>
       <Switch>
         {/* <Route exact path='/'> */}
-        <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute exact path="/" component={Home} currentUserId={props.currentUserId} />
           {/* <Home/> */}
         {/* </Route> */}
         {/* <Route path='/register'> */}
-        <AuthRoute path="/register" component={RegistrationForm} />
+        <AuthRoute path="/register" component={RegistrationForm} currentUserId={props.currentUserId}/>
           {/* <RegistrationForm /> */}
         {/* </Route> */}
         {/* <Route path='/login'> */}
-          <AuthRoute path="/login" component={LoginForm} />
+          <AuthRoute path="/login" component={LoginForm} currentUserId={props.currentUserId}/>
           {/* <LoginForm/> */}
         {/* </Route> */}
         <Route path='/users/:userId'>
