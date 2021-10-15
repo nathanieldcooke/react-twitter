@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { jwtConfig } = require("./config");
 const { User } = require("./db/models");
+const bearerToken = require('express-bearer-token')
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -26,9 +27,15 @@ const restoreUser = (req, res, next) => {
   // token being parsed from request's cookies by the cookie-parser middleware
   // function in app.js:
 
+  // ORIGINAL WAY TO ACCESS TOKEN, DOES NOT WORK.
   // const { token } = req.cookies; // this is not working
+
+  // 1. with express-bearer-token installed and bearerToken invoked, token is available 
+  // const { token } = req;
+
+  // 2. alternative way to access token on request body
   const token = req.headers.authorization.split(' ')[1];
-  // console.log('token', req.headers.authorization.split(' ')[1])
+
 
 
 
@@ -66,6 +73,6 @@ const restoreUser = (req, res, next) => {
   });
 };
 
-const requireAuth = [restoreUser];
+const requireAuth = [bearerToken(), restoreUser];
 
 module.exports = { getUserToken, requireAuth };

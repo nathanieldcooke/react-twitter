@@ -44,7 +44,7 @@ class Home extends React.Component {
             <div>
                 <h1>Home Page</h1>
                 <button
-                    onClick={() => this.logoutFunc.bind(this)()}
+                    onClick={() => this.logoutFunc()}
                 >Logout</button>
                 <ul>
                     {this.state.tweets?.map((tweet) => {

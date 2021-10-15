@@ -17,3 +17,10 @@ temp-solution: was finding another place the token is stored on the req object, 
 
 2.
 why in Home.js do I have to bind this to logutFunc for this to be related to class.
+
+
+
+
+Trying to solve issure
+
+Not instruction to install/use bearerToken, or put in requireAuth array?!
